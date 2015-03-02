@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <bean id="registrationForm" class="ru.innopolis.olympiads.domain.Form">
+              <property name="tableName" value="contestants"/>
+              <property name="inputs">
+                     <list>
+                            <bean class="ru.innopolis.olympiads.domain.TextInput">
+                                   <property name="columnName" value="firstName"/>
+                                   <property name="isRequired" value="true"/>
+                            </bean>
+                            <bean class="ru.innopolis.olympiads.domain.TextInput">
+                                   <property name="columnName" value="middleName"/>
+                                   <property name="isRequired" value="true"/>
+                            </bean>
+                            <bean class="ru.innopolis.olympiads.domain.TextInput">
+                                   <property name="columnName" value="lastName"/>
+                                   <property name="isRequired" value="true"/>
+                            </bean>
+                            <bean class="ru.innopolis.olympiads.domain.TextInput">
+                                   <property name="isRequired" value="true"/>
+                                   <property name="columnName" value="password"/>
+                                   <property name="minLength" value="6"/>
+                            </bean>
+                            <bean class="ru.innopolis.olympiads.domain.TextInput">
+                                   <property name="isRequired" value="true"/>
+                                   <property name="columnName" value="email"/>
+                                   <property name="regex" value="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                            </bean>
+                     </list>
+              </property>
+       </bean>
+</beans>

@@ -1,0 +1,6 @@
+email.required=Поле должно быть заполнено
+firstName.required=Поле должно быть заполнено
+middleName.required=Поле должно быть заполнено
+lastName.required=Поле должно быть заполнено
+password.required=Поле должно быть заполнено
+password.minLength=Минимальная длина пароля - 8 символов
