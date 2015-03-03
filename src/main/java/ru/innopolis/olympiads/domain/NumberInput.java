@@ -40,8 +40,8 @@ public class NumberInput extends Input {
             errors.add(getProperty("value.type"));
             return errors;
         }
-        if (maxValue != null && maxValue > value) errors.add(getProperty("value.maxValue"));
-        if (minValue != null && minValue < value) errors.add(getProperty("value.minValue"));
+        if (maxValue != null && maxValue < value) errors.add(getProperty("value.maxValue"));
+        if (minValue != null && minValue > value) errors.add(getProperty("value.minValue"));
         return errors;
     }
 
