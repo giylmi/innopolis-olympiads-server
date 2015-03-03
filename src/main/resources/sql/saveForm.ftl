@@ -2,7 +2,7 @@
 insert into ${tableName}
     (
         <#list params?keys as key>
-            "${key}"<#if key_has_next>,</#if>
+            `${key}`<#if key_has_next>,</#if>
         </#list>
     ) values
     (
