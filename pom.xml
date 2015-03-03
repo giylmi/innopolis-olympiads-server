@@ -99,6 +99,7 @@
     </properties>
 
     <build>
+        <finalName>olympiads</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
