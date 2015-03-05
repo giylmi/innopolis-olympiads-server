@@ -39,8 +39,7 @@ public abstract class Input {
     };
 
     protected String getProperty(String propertyName){
-        String property = ApplicationContextAware.getEnvironment().getProperty(columnName + "." + propertyName);
-        return property == null ? columnName + "." + propertyName : property;
+        return ApplicationContextAware.getPropertiesHolder().getProperty(columnName + "." + propertyName);
     }
 
     public abstract String convertValue(String s);

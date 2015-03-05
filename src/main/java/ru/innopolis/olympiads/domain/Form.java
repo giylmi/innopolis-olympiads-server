@@ -47,7 +47,7 @@ public class Form {
 //    }
 
     private String getProperty(String unreadable) {
-        return ApplicationContextAware.getEnvironment().getProperty(tableName + "." + unreadable);
+        return ApplicationContextAware.getPropertiesHolder().getProperty(tableName + "." + unreadable);
     }
 
     public String getTableName() {
