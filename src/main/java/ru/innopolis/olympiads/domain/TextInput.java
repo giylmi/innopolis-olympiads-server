@@ -54,7 +54,6 @@ public class TextInput extends Input {
         if (maxLength != null && value.length() > maxLength) errors.add(getProperty("value.maxLength"));
         if (minLength != null && value.length() < minLength) errors.add(getProperty("value.minLength"));
         if (regex != null) {
-            String regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(value);
             if (!matcher.matches()) errors.add(getProperty("value.regex"));

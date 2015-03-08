@@ -3,6 +3,9 @@ package ru.innopolis.olympiads.properties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.Properties;
 
 /**
@@ -21,7 +24,8 @@ public class PropertiesHolder implements InitializingBean {
         for (Resource resource: resources)
             if (resource.exists()){
                 Properties newProperties = new Properties();
-                newProperties.load(resource.getInputStream());
+                InputStreamReader fis = new InputStreamReader(resource.getInputStream(), "UTF-8");
+                newProperties.load(fis);
                 properties.putAll(newProperties);
             }
     }

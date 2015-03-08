@@ -29,6 +29,35 @@
                                    <property name="columnName" value="email"/>
                                    <property name="regex" value="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                             </bean>
+                            <bean class="ru.innopolis.olympiads.domain.TextInput">
+                                   <property name="isRequired" value="true"/>
+                                   <property name="columnName" value="dateOfBirth"/>
+                                   <property name="regex" value="(0?[1-9]|[12][0-9]|3[01]).(0?[1-9]|1[012]).((19|20)\d\d)"/>
+                            </bean>
+                            <bean class="ru.innopolis.olympiads.domain.TextInput">
+                                   <property name="isRequired" value="true"/>
+                                   <property name="columnName" value="region"/>
+                            </bean>
+                            <bean class="ru.innopolis.olympiads.domain.TextInput">
+                                   <property name="isRequired" value="true"/>
+                                   <property name="columnName" value="city"/>
+                            </bean>
+                            <bean class="ru.innopolis.olympiads.domain.TextInput">
+                                   <property name="isRequired" value="true"/>
+                                   <property name="columnName" value="school"/>
+
+                            </bean>
+                            <bean class="ru.innopolis.olympiads.domain.NumberInput">
+                                   <property name="isRequired" value="true"/>
+                                   <property name="columnName" value="grade"/>
+                                   <property name="minValue" value="7"/>
+                                   <property name="maxValue" value="11"/>
+                            </bean>
+                            <bean class="ru.innopolis.olympiads.domain.TextInput">
+                                   <property name="isRequired" value="true"/>
+                                   <property name="columnName" value="tel"/>
+                                   <property name="regex" value="\+79\d{9}"/>
+                            </bean>
                      </list>
               </property>
        </bean>
