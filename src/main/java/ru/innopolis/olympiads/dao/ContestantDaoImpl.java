@@ -34,7 +34,9 @@ public class ContestantDaoImpl implements ContestantDao {
                 contestant.setFirstName(resultSet.getString("firstName"));
                 contestant.setMiddleName(resultSet.getString("middleName"));
                 contestant.setLastName(resultSet.getString("lastName"));
-                contestant.setStatus(resultSet.getBoolean("status"));
+                if (resultSet.getObject("status") != null) {
+                    contestant.setStatus(resultSet.getBoolean("status"));
+                }
                 return contestant;
             }
         });
