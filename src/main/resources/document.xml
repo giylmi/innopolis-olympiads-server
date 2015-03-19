@@ -56,7 +56,8 @@
                             <bean class="ru.innopolis.olympiads.domain.TextInput">
                                    <property name="isRequired" value="true"/>
                                    <property name="columnName" value="tel"/>
-                                   <property name="regex" value="\+79\d{9}"/>
+                                   <!--property name="regex" value="\+79\d{9}"/-->
+                                   <property name="regex" value="\+\d{11}"/>
                             </bean>
                      </list>
               </property>
