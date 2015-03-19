@@ -57,7 +57,7 @@
                                    <property name="isRequired" value="true"/>
                                    <property name="columnName" value="tel"/>
                                    <!--property name="regex" value="\+79\d{9}"/-->
-                                   <property name="regex" value="\+\d{11}"/>
+                                   <property name="regex" value="\+[1-9]{1}[0-9]{3-14}"/>
                             </bean>
                      </list>
               </property>
