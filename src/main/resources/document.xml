@@ -32,7 +32,7 @@
                             <bean class="ru.innopolis.olympiads.domain.TextInput">
                                    <property name="isRequired" value="true"/>
                                    <property name="columnName" value="dateOfBirth"/>
-                                   <property name="regex" value="(0?[1-9]|[12][0-9]|3[01]).(0?[1-9]|1[012]).((19|20)\d\d)"/>
+                                   <property name="regex" value="(0?[1-9]|[12][0-9]|3[01])\.(0?[1-9]|1[012])\.((19|20)\d\d)"/>
                             </bean>
                             <bean class="ru.innopolis.olympiads.domain.TextInput">
                                    <property name="isRequired" value="true"/>
@@ -55,9 +55,8 @@
                             </bean>
                             <bean class="ru.innopolis.olympiads.domain.TextInput">
                                    <property name="isRequired" value="true"/>
-                                   <property name="columnName" value="tel"/>
-                                   <!--property name="regex" value="\+79\d{9}"/-->
-                                   <property name="regex" value="\+[1-9]{1}[0-9]{3-14}"/>
+                                   <property name="columnName" value="tel"/>                                   
+                                   <property name="regex" value="\+[1-9]{1}[0-9]{3,14}"/>
                             </bean>
                      </list>
               </property>
