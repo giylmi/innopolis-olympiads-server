@@ -28,17 +28,21 @@ public class FormDaoImpl implements FormDao {
 
     @Override
     public Boolean saveForm(Map<String, String> map, String tableName) {
-        try {
-            ImmutableMap.Builder builder = ImmutableMap.builder();
-            for (Input input: form.getInputs()){
+        Boolean formActive = false;
 
-                String value = map.get(input.getColumnName());
-                if (value != null)
-                    map.put(input.getColumnName(), input.convertValue(map.get(input.getColumnName())));
+        try {
+            if (formActive) {
+                ImmutableMap.Builder builder = ImmutableMap.builder();
+                for (Input input : form.getInputs()) {
+
+                    String value = map.get(input.getColumnName());
+                    if (value != null)
+                        map.put(input.getColumnName(), input.convertValue(map.get(input.getColumnName())));
+                }
+                builder.put("params", map);
+                builder.put("tableName", tableName);
+                ds.execute(QueryManager.getQuery("sql/saveForm.ftl", builder.build()));
             }
-            builder.put("params", map);
-            builder.put("tableName", tableName);
-            ds.execute(QueryManager.getQuery("sql/saveForm.ftl", builder.build()));
         } catch (Exception e) {
             logger.error("failed", e);
             return false;
