@@ -5,6 +5,7 @@
 
        <bean id="registrationForm" class="ru.innopolis.olympiads.domain.Form">
               <property name="tableName" value="contestants"/>
+              <property name="isActive" value="false"/>
               <property name="inputs">
                      <list>
                             <bean class="ru.innopolis.olympiads.domain.TextInput">

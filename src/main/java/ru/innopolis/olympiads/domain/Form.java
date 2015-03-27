@@ -18,7 +18,7 @@ public class Form {
 
     public Map<String, List<String>> isValid(Map<String, String> form){
         Map<String, List<String>> errorsMap = new HashMap<>();
-        if (isActive) {
+        if (isActive != null && !isActive) {
             errorsMap.put(tableName, Lists.newArrayList(getProperty("notActive")));
             return errorsMap;
         }
