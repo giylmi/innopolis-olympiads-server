@@ -65,7 +65,7 @@ public class FormDaoImpl implements FormDao {
                 @Override
                 public Boolean extractData(ResultSet resultSet) throws SQLException, DataAccessException {
                     resultSet.next();
-                    return resultSet.getBoolean(0);
+                    return resultSet.getBoolean("isActive");
                 }
             });
             form.setIsActive(isActive);
