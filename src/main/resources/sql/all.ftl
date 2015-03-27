@@ -1,1 +1,1 @@
-select * from ${tableName};
+select <#list vo.columnsList as column>"${column}"<#if column_has_next>,</#if></#list> from ${vo.tableName};

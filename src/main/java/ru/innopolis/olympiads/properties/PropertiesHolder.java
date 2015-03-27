@@ -3,8 +3,6 @@ package ru.innopolis.olympiads.properties;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.Properties;
 

@@ -11,7 +11,7 @@ import ru.innopolis.olympiads.properties.PropertiesHolder;
  * Created by giylmi on 28.02.2015.
  */
 @Configuration
-@ImportResource("classpath:/document.xml")
+@ImportResource("classpath:/forms/forms.xml")
 public class FormConfig {
 
     @Bean

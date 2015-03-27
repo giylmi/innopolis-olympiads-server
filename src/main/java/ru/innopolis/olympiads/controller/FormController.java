@@ -1,14 +1,15 @@
 package ru.innopolis.olympiads.controller;
 
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ru.innopolis.olympiads.dao.ContestantDao;
 import ru.innopolis.olympiads.dao.FormDao;
-import ru.innopolis.olympiads.domain.Contestant;
 import ru.innopolis.olympiads.domain.Form;
+import ru.innopolis.olympiads.domain.ViewObject;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -23,28 +24,32 @@ import java.util.Map;
 public class FormController {
 
     @Autowired
-    Form form;
-
-    @Autowired
     FormDao formDao;
 
-    @Autowired
-    ContestantDao contestantDao;
-
-    @RequestMapping(method = RequestMethod.POST, value = "save")
+    @RequestMapping(method = RequestMethod.POST, value = "save/{formId}")
     @ResponseBody
-    public Map<String, List<String>> validateAndRegister(HttpServletRequest request){
+    public Map<String, List<String>> validateAndRegister(HttpServletRequest request, @PathVariable("formId") String formId){
         Map<String, String> regForm = convert(request.getParameterMap());
-        Map<String, List<String>> errors = form.isValid(regForm);
+        Form form = formDao.getFormById(formId);
+        Map<String, List<String>> errors;
+        if (form != null)
+            errors = form.isValid(regForm);
+        else {
+            errors = new HashMap<>();
+            errors.put("form", Lists.newArrayList("noSuchForm"));
+            return errors;
+        }
         if (!errors.isEmpty()) return errors;
         if (!formDao.saveForm(regForm, form.getTableName())) errors.put(form.getTableName(), Arrays.asList(form.getTableName() + "." + "notsaved"));
         return errors;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "contestants")
+    @RequestMapping(method = RequestMethod.POST, value = "values/{voId}")
     @ResponseBody
-    public List<Contestant> contestants(){
-        return contestantDao.all();
+    public List<Map<String, String>> contestants(@PathVariable("voId") String voId){
+        ViewObject vo = formDao.getVOById(voId);
+        if (vo == null) return Lists.newArrayList();
+        return formDao.allValues(vo);
     }
 
     private Map<String, String> convert(Map<String, String[]> parameterMap) {

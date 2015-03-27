@@ -1,5 +1,6 @@
 package ru.innopolis.olympiads.domain;
 
+import com.google.common.collect.Lists;
 import ru.innopolis.olympiads.config.ApplicationContextAware;
 
 import java.util.HashMap;
@@ -13,9 +14,14 @@ public class Form {
 
     private String tableName;
     private List<Input> inputs;
+    private Boolean isActive;
 
     public Map<String, List<String>> isValid(Map<String, String> form){
         Map<String, List<String>> errorsMap = new HashMap<>();
+        if (isActive) {
+            errorsMap.put(tableName, Lists.newArrayList(getProperty("notActive")));
+            return errorsMap;
+        }
         for (Input field : inputs) {
             String value = form.get(field.getColumnName());
             List<String> errors = field.validate(value);
@@ -25,26 +31,13 @@ public class Form {
         return errorsMap;
     }
 
-//    public Map<String, List<String>> isValid(String form){
-//        try {
-//            JsonFactory factory = new JsonFactory();
-//            JsonParser jsonParser = factory.createParser(form);
-//            Map<String, List<String>> errorsMap = new HashMap<>();
-//            while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
-//                String fieldName = jsonParser.getCurrentName();
-//                Object value = jsonParser.getCurrentValue();
-//                for (Input field : inputs)
-//                    if (fieldName.equals(field.getColumnName())) {
-//                        List<String> errors = field.validate(value);
-//                        if (!errors.isEmpty())
-//                            errorsMap.put(field.getColumnName(), errors);
-//                    }
-//            }
-//            return errorsMap;
-//        } catch (IOException e) {
-//            return ImmutableMap.<String, List<String>>builder().put(tableName, Arrays.asList(getProperty("unreadable"))).build();
-//        }
-//    }
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
 
     private String getProperty(String unreadable) {
         return ApplicationContextAware.getPropertiesHolder().getProperty(tableName + "." + unreadable);
