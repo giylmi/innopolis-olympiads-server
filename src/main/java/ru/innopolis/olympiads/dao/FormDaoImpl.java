@@ -51,6 +51,7 @@ public class FormDaoImpl implements FormDao {
             builder.put("tableName", tableName);
             ds.execute(QueryManager.getQuery("sql/saveForm.ftl", builder.build()));
         } catch (Exception e) {
+			e.printStackTrace();
             logger.error("failed", e);
             return false;
         }
