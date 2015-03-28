@@ -5,4 +5,6 @@
 
        <import resource="registationForm.xml"/>
        <import resource="contestantViewObject.xml"/>
+	   
+	   <import resource="final-registration-form.xml"/>
 </beans>
