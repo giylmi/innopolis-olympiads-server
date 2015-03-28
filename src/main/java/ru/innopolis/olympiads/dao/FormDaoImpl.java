@@ -61,7 +61,7 @@ public class FormDaoImpl implements FormDao {
     public Form getFormById(String formId) {
         try{
             Form form = context.getBean(formId, Form.class);
-            Boolean isActive = ds.query("select isActive from forms where `formName`='" + formId + "'", new ResultSetExtractor<Boolean>() {
+            Boolean isActive = ds.query("select isActive from forms where `formName`='" + formId + "';", new ResultSetExtractor<Boolean>() {
                 @Override
                 public Boolean extractData(ResultSet resultSet) throws SQLException, DataAccessException {
                     resultSet.next();
@@ -71,6 +71,7 @@ public class FormDaoImpl implements FormDao {
             form.setIsActive(isActive);
             return form;
         } catch (BeansException e) {
+			e.printStackTrace();
             return null;
         }
     }
