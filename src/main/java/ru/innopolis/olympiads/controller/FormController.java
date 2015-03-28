@@ -30,7 +30,9 @@ public class FormController {
     @ResponseBody
     public Map<String, List<String>> validateAndRegister(HttpServletRequest request, @PathVariable("formId") String formId){
         Map<String, String> regForm = convert(request.getParameterMap());
+        //System.out.println("getting form " + formId);
         Form form = formDao.getFormById(formId);
+        //System.out.println("form.isactive=" + form.getIsActive() + " tablename=" + form.getTableName());
         Map<String, List<String>> errors;
         if (form != null)
             errors = form.isValid(regForm);
@@ -40,7 +42,7 @@ public class FormController {
             return errors;
         }
         if (!errors.isEmpty()) return errors;
-        if (!formDao.saveForm(regForm, form.getTableName())) errors.put(form.getTableName(), Arrays.asList(form.getTableName() + "." + "notsaved"));
+        if (!formDao.saveForm(regForm, formId)) errors.put(form.getTableName(), Arrays.asList(form.getTableName() + "." + "notsaved"));
         return errors;
     }
 

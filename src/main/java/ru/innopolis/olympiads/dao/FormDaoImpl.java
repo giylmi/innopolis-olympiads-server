@@ -37,8 +37,9 @@ public class FormDaoImpl implements FormDao {
     ApplicationContext context;
 
     @Override
-    public Boolean saveForm(Map<String, String> map, String tableName) {
-        Form form = getFormById(tableName);
+    public Boolean saveForm(Map<String, String> map, String formId) {
+        Form form = getFormById(formId);
+
         try {
             ImmutableMap.Builder builder = ImmutableMap.builder();
             for (Input input : form.getInputs()) {
@@ -48,7 +49,7 @@ public class FormDaoImpl implements FormDao {
                     map.put(input.getColumnName(), input.convertValue(map.get(input.getColumnName())));
             }
             builder.put("params", map);
-            builder.put("tableName", tableName);
+            builder.put("tableName", form.getTableName());
             ds.execute(QueryManager.getQuery("sql/saveForm.ftl", builder.build()));
         } catch (Exception e) {
 			e.printStackTrace();
@@ -92,6 +93,7 @@ public class FormDaoImpl implements FormDao {
         try {
             return context.getBean(voId, ViewObject.class);
         } catch (BeansException e){
+            e.printStackTrace();
             return null;
         }
     }

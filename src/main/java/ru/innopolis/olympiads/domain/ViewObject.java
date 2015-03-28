@@ -17,7 +17,12 @@ public class ViewObject {
     public Map<String, String> values(ResultSet resultSet) throws SQLException {
         Map<String, String> map = new HashMap<>();
         for (String column: columnsList)
-            map.put(column, String.valueOf(resultSet.getObject(column)));
+            if (resultSet.getObject(column) != null){
+                map.put(column, String.valueOf(resultSet.getObject(column)));
+            } else {
+                map.put(column, null);
+            }
+
         return map;
     }
 
