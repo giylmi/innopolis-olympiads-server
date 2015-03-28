@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="final-registration-form" class="ru.innopolis.olympiads.domain.Form">
+		<property name="tableName" value="final_contestants"/>
+		<property name="inputs">
+			<list>                            
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="last_name"/>
+					<property name="isRequired" value="true"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="first_name"/>
+					<property name="isRequired" value="true"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="middle_name"/>
+					<property name="isRequired" value="true"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="dob"/>
+					<property name="isRequired" value="true"/>					
+					<property name="regex" value="(0?[1-9]|[12][0-9]|3[01])\.(0?[1-9]|1[012])\.((19|20)\d\d)"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="region"/>
+					<property name="isRequired" value="true"/>					
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="city"/>
+					<property name="isRequired" value="true"/>					
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="school"/>
+					<property name="isRequired" value="true"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.NumberInput">
+					<property name="columnName" value="grade"/>
+					<property name="isRequired" value="true"/>
+					<property name="minValue" value="7"/>
+					<property name="maxValue" value="11"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="tel"/>
+					<property name="isRequired" value="true"/>
+					<property name="regex" value="\+[1-9]{1}[0-9]{3,14}"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="email"/>
+					<property name="isRequired" value="true"/>
+					<property name="regex" value="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="parent_name"/>
+					<property name="isRequired" value="true"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="parent_tel"/>
+					<property name="isRequired" value="true"/>
+					<property name="regex" value="\+[1-9]{1}[0-9]{3,14}"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="soft"/>
+					<property name="isRequired" value="true"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="arrival_time"/>
+					<property name="isRequired" value="false"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="depart_time"/>
+					<property name="isRequired" value="false"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="teacher_name"/>
+					<property name="isRequired" value="false"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="teacher_email"/>
+					<property name="isRequired" value="false"/>
+					<property name="regex" value="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+				</bean>
+				
+			</list>
+		</property>
+    </bean>
+</beans>
