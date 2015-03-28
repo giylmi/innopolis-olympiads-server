@@ -19,6 +19,7 @@ import ru.innopolis.olympiads.domain.ViewObject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,8 +67,8 @@ public class FormDaoImpl implements FormDao {
             Boolean isActive = ds.query("select isActive from forms where `formName`='" + formId + "';", new ResultSetExtractor<Boolean>() {
                 @Override
                 public Boolean extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                    resultSet.next();
-                    return resultSet.getBoolean("isActive");
+                    boolean hasNext = resultSet.next();
+                    return hasNext && resultSet.getBoolean("isActive");
                 }
             });
             form.setIsActive(isActive);
@@ -101,5 +102,53 @@ public class FormDaoImpl implements FormDao {
     @Override
     public Map<String, Form> allForms() {
         return context.getBeansOfType(Form.class);
+    }
+
+    @Override
+    public boolean checkUnique(String formName, String[] values, String[] columnNames) {
+        return ds.query(QueryManager.getQuery("sql/unique.ftl",
+                        ImmutableMap.<String, Object>builder()
+                                .put("values", values)
+                                .put("columnNames", columnNames)
+                                .put("formName", formName).build()),
+                new ResultSetExtractor<Boolean>() {
+                    @Override
+                    public Boolean extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                        resultSet.next();
+                        return resultSet.getLong(0) == 0L;
+                    }
+                });
+    }
+
+    @Override
+    public Map<String, List<Object>> getTableValues(String formId) {
+        Form form = getFormById(formId);
+        Map<String, List<Object>> result = new HashMap<>();
+        if (form != null) {
+            result = ds.query("select * from " + form.getTableName(), new ResultSetExtractor<Map<String, List<Object>>>() {
+                @Override
+                public Map<String, List<Object>> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                    Map<String, List<Object>> result = new HashMap<>();
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++){
+                            String columnName = resultSet.getMetaData().getColumnName(i);
+                            List<Object> values = result.get(columnName);
+                            if (values == null) {
+                                values = new ArrayList<Object>();
+                                result.put(columnName, values);
+                            }
+                            if (!columnName.equals("status"))
+                                values.add(String.valueOf(resultSet.getObject(i)));
+                            else {
+                                Object value = resultSet.getObject(i);
+                                values.add(value);
+                            }
+                        }
+                    }
+                    return result;
+                }
+            });
+        }
+        return result;
     }
 }

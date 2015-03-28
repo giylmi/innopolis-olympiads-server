@@ -1,7 +1,9 @@
 package ru.innopolis.olympiads.domain;
 
 import com.google.common.collect.ImmutableList;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.innopolis.olympiads.config.ApplicationContextAware;
+import ru.innopolis.olympiads.dao.FormDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +13,20 @@ import java.util.List;
  */
 public abstract class Input {
 
+    @Autowired
+    FormDao formDao;
+
     protected String columnName;
     protected Boolean isRequired;
+    protected Boolean unique;
+
+    public Boolean getUnique() {
+        return unique != null && unique;
+    }
+
+    public void setUnique(Boolean unique) {
+        this.unique = unique;
+    }
 
     public String getColumnName() {
         return columnName;
@@ -30,16 +44,25 @@ public abstract class Input {
         this.isRequired = isRequired;
     }
 
-    protected abstract List<String> doValidate(String value);
+    protected abstract List<String> doValidate(String value, String formName);
 
-    public List<String> validate(String value){
+    public List<String> validate(String value, String formName){
         List<String> errors = new ArrayList<>();
-        if (isRequired != null && isRequired && value.isEmpty() ) errors.add(getProperty("required"));
-        return ImmutableList.<String>builder().addAll(errors).addAll(doValidate(value)).build();
-    };
+        if (isRequired != null && isRequired && value.isEmpty() ) errors.add(getProperty(formName, "required"));
+        List<String> doValidate = doValidate(value, formName);
+        List<String> uniqueError = new ArrayList<>();
+        if (errors.isEmpty() && doValidate.isEmpty()) uniqueError = validateUnique(value, formName);
+        return ImmutableList.<String>builder().addAll(errors).addAll(doValidate).addAll(uniqueError).build();
+    }
 
-    protected String getProperty(String propertyName){
-        return ApplicationContextAware.getPropertiesHolder().getProperty(columnName + "." + propertyName);
+    private List<String> validateUnique(String value, String formName) {
+        List<String> uniqueError = new ArrayList<>();
+        if (!formDao.checkUnique(formName, new String[]{convertValue(value)}, new String[]{columnName})) uniqueError.add(getProperty(formName, "unique"));
+        return uniqueError;
+    }
+
+    protected String getProperty(String formName, String propertyName){
+        return ApplicationContextAware.getPropertiesHolder().getProperty(formName + "." + columnName + "." + propertyName);
     }
 
     public abstract String convertValue(String s);

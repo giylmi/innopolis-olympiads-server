@@ -41,22 +41,22 @@ public class TextInput extends Input {
     }
 
     @Override
-    public List<String> doValidate(String o) {
+    public List<String> doValidate(String o, String formName) {
         if (o.isEmpty()) return ImmutableList.of();
         String value = null;
         List<String> errors = new ArrayList<>();
         try{
             value = (String) o;
         } catch (Exception e) {
-            errors.add(getProperty("value.type"));
+            errors.add(getProperty(formName, "type"));
             return errors;
         }
-        if (maxLength != null && value.length() > maxLength) errors.add(getProperty("value.maxLength"));
-        if (minLength != null && value.length() < minLength) errors.add(getProperty("value.minLength"));
+        if (maxLength != null && value.length() > maxLength) errors.add(getProperty(formName, "maxLength"));
+        if (minLength != null && value.length() < minLength) errors.add(getProperty(formName, "minLength"));
         if (regex != null) {
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(value);
-            if (!matcher.matches()) errors.add(getProperty("value.regex"));
+            if (!matcher.matches()) errors.add(getProperty(formName, "regex"));
         }
         return errors;
     }

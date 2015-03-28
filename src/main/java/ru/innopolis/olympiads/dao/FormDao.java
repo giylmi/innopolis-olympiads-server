@@ -20,4 +20,8 @@ public interface FormDao {
     ViewObject getVOById(String voId);
 
     Map<String, Form> allForms();
+
+    boolean checkUnique(String formName, String[] values, String[] columnNames);
+
+    Map<String, List<Object>> getTableValues(String formId);
 }

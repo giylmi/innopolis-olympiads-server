@@ -30,18 +30,18 @@ public class NumberInput extends Input {
     }
 
     @Override
-    public List<String> doValidate(String o) {
+    public List<String> doValidate(String o, String formName) {
         if (o.isEmpty()) return ImmutableList.of();
         Double value = null;
         List<String> errors = new ArrayList<>();
         try{
             value = Double.valueOf(o);
         } catch (Exception e) {
-            errors.add(getProperty("value.type"));
+            errors.add(getProperty(formName, "type"));
             return errors;
         }
-        if (maxValue != null && maxValue < value) errors.add(getProperty("value.maxValue"));
-        if (minValue != null && minValue > value) errors.add(getProperty("value.minValue"));
+        if (maxValue != null && maxValue < value) errors.add(getProperty(formName, "maxValue"));
+        if (minValue != null && minValue > value) errors.add(getProperty(formName, "minValue"));
         return errors;
     }
 
