@@ -5,6 +5,7 @@
 
     <bean id="final-registration-form" class="ru.innopolis.olympiads.domain.Form">
 		<property name="tableName" value="final_contestants"/>
+		<property name="isActive" value="true"/>
 		<property name="inputs">
 			<list>                            
 				<bean class="ru.innopolis.olympiads.domain.TextInput">
@@ -59,6 +60,7 @@
 				<bean class="ru.innopolis.olympiads.domain.TextInput">
 					<property name="columnName" value="email"/>
 					<property name="isRequired" value="true"/>
+					<property name="unique" value="true" />
 					<property name="regex" value="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
 				</bean>
 				
