@@ -115,7 +115,7 @@ public class FormDaoImpl implements FormDao {
                     @Override
                     public Boolean extractData(ResultSet resultSet) throws SQLException, DataAccessException {
                         resultSet.next();
-                        return resultSet.getLong(0) == 0L;
+                        return resultSet.getLong(1) == 0L;
                     }
                 });
     }
