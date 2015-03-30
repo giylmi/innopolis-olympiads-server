@@ -1,6 +1,7 @@
 package ru.innopolis.olympiads.dao;
 
 import ru.innopolis.olympiads.domain.Form;
+import ru.innopolis.olympiads.domain.Table;
 import ru.innopolis.olympiads.domain.ViewObject;
 
 import java.util.List;
@@ -23,5 +24,7 @@ public interface FormDao {
 
     boolean checkUnique(String formName, String[] values, String[] columnNames);
 
-    Map<String, List<Object>> getTableValues(String formId);
+    Table getTableValues(String formId);
+
+    boolean updateStatus(String form, String id, Boolean status);
 }

@@ -14,14 +14,12 @@ import ru.innopolis.olympiads.dao.adapter.DataSourceAdapter;
 import ru.innopolis.olympiads.dao.adapter.QueryManager;
 import ru.innopolis.olympiads.domain.Form;
 import ru.innopolis.olympiads.domain.Input;
+import ru.innopolis.olympiads.domain.Table;
 import ru.innopolis.olympiads.domain.ViewObject;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by giylmi on 28.02.2015.
@@ -121,34 +119,46 @@ public class FormDaoImpl implements FormDao {
     }
 
     @Override
-    public Map<String, List<Object>> getTableValues(String formId) {
+    public Table getTableValues(String formId) {
         Form form = getFormById(formId);
-        Map<String, List<Object>> result = new HashMap<>();
-        if (form != null) {
-            result = ds.query("select * from " + form.getTableName(), new ResultSetExtractor<Map<String, List<Object>>>() {
-                @Override
-                public Map<String, List<Object>> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                    Map<String, List<Object>> result = new HashMap<>();
-                    while (resultSet.next()) {
-                        for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++){
-                            String columnName = resultSet.getMetaData().getColumnName(i);
-                            List<Object> values = result.get(columnName);
-                            if (values == null) {
-                                values = new ArrayList<Object>();
-                                result.put(columnName, values);
-                            }
-                            if (!columnName.equals("status"))
-                                values.add(String.valueOf(resultSet.getObject(i)));
-                            else {
-                                Object value = resultSet.getObject(i);
-                                values.add(value);
-                            }
+        Table result;
+        result = ds.query("select * from " + form.getTableName(), new ResultSetExtractor<Table>() {
+            @Override
+            public Table extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                Table result = new Table(resultSet.getMetaData().getColumnCount());
+                int j = 0;
+                while (resultSet.next()) {
+                    for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
+                        String columnName = resultSet.getMetaData().getColumnName(i);
+                        if (result.getData()[i - 1] == null)
+                            result.getData()[i - 1] = new Table.Column(columnName);
+                        if (!columnName.equals("status"))
+                            result.getData()[i - 1].getData().add(String.valueOf(resultSet.getObject(i)));
+                        else {
+                            result.getData()[i - 1].getData().add(resultSet.getObject(i));
                         }
                     }
-                    return result;
+                    j++;
                 }
-            });
-        }
+                result.setRows(j);
+                return result;
+            }
+        });
+        Arrays.sort(result.getData());
         return result;
     }
+
+    @Override
+    public boolean updateStatus(String formId, String id, Boolean status) {
+        Form form = getFormById(formId);
+        if (form == null) return false;
+        try {
+            ds.execute("update " + form.getTableName() + " set status=" + status + " where id=" + id);
+        } catch (Exception e) {
+            logger.error("caught", e);
+            return false;
+        }
+        return true;
+    }
+
 }
