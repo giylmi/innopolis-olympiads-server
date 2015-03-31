@@ -23,7 +23,7 @@
             <#list forms?keys as key>
                 <#assign form = forms[key]/>
                 <li class="js-form-selector-wrapper">
-                    <a class="js-form-selector<#if key != current> active</#if>" data-form="${key}">
+                    <a href="${rc.contextPath}/admin/${key}" class="js-form-selector<#if key != current> active</#if>" data-form="${key}">
                     ${form.tableName}
                     </a>
                 </li>

@@ -13,7 +13,7 @@
                 <#list table.data as column>
                     <#if column.name == "status">
                         <td>
-                            <form action="/admin/update/${current}/${id!}">
+                            <form action="${rc.contextPath}/admin/update/${current}/${id!}">
                                 <select name="status" onclick="$(this).parents('form').submit()">
                                     <option value="null" <#if column.data[i]??>selected="selected"</#if>>Не подтвержден</option>
                                     <option value="false" <#if column.data[i]?? && !column.data[i]>selected="selected"</#if>>Отклонен</option>
