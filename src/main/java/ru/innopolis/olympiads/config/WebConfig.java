@@ -31,6 +31,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         configurer.setDefaultEncoding("UTF-8");
         configurer.setFreemarkerSettings(new Properties() {{
             this.put("default_encoding", "UTF-8");
+            this.put("requestContextAttribute", "rc");
         }});
         return configurer;
     }

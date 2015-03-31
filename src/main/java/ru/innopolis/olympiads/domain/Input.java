@@ -51,7 +51,7 @@ public abstract class Input {
         if (isRequired != null && isRequired && value.isEmpty() ) errors.add(getProperty(formName, "required"));
         List<String> doValidate = doValidate(value, formName);
         List<String> uniqueError = new ArrayList<>();
-        if (errors.isEmpty() && doValidate.isEmpty()) uniqueError = validateUnique(value, formName);
+        if (errors.isEmpty() && doValidate.isEmpty() &&  unique != null && unique) uniqueError = validateUnique(value, formName);
         return ImmutableList.<String>builder().addAll(errors).addAll(doValidate).addAll(uniqueError).build();
     }
 

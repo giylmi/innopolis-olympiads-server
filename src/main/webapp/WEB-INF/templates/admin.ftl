@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <title></title>
 
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/${rc.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.css"/>
 
-    <script src="/resources/js/jquery-2.1.1.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/${rc.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
+    <script src="/${rc.contextPath}/resources/js/bootstrap.min.js"></script>
     <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
     <script src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-    <script src="/resources/js/script.js"></script>
+    <script src="/${rc.contextPath}/resources/js/script.js"></script>
 
 </head>
 <body>
