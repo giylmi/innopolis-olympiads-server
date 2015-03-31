@@ -16,21 +16,21 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-xs-4">
-            <ul>
+        <div class="col-xs-2">
+            <ul class="nav nav-pills nav-stacked">
             <#list forms?keys as key>
                 <#assign form = forms[key]/>
-                <li class="js-form-selector-wrapper">
-                    <a href="${rc.contextPath}/admin/${key}" class="js-form-selector<#if key != current> active</#if>" data-form="${key}">
+                <li class="js-form-selector-wrapper <#if key == current> active</#if>">
+                    <a href="${rc.contextPath}/admin/${key}" class="js-form-selector" data-form="${key}">
                     ${form.tableName}
                     </a>
                 </li>
             </#list>
             </ul>
         </div>
-        <div class="col-xs-8 js-table-content">
+        <div class="col-xs-10 js-table-content">
             <#include "table.ftl"/>
         </div>
     </div>
