@@ -45,7 +45,7 @@ public class AdminController {
 
     @RequestMapping(value = "update/{form}/{id}")
     @ResponseBody
-    public String update(@PathVariable("form") String form, @PathVariable("id") String id, @RequestParam Boolean status){
+    public String update(@PathVariable("form") String form, @PathVariable("id") String id, @RequestParam(required = false) Boolean status){
         if (formDao.updateStatus(form, id, status))
             return "ok";
         return "no";
