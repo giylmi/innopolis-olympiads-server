@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="final-registration-form-guest" class="ru.innopolis.olympiads.domain.Form">
+		<property name="tableName" value="final_guests"/>
+		<property name="isActive" value="true"/>
+		<property name="inputs">
+			<list>                            
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="last_name"/>
+					<property name="isRequired" value="true"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="first_name"/>
+					<property name="isRequired" value="true"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="middle_name"/>
+					<property name="isRequired" value="true"/>
+				</bean>				
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="guest_type"/>
+					<property name="isRequired" value="true"/>					
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="region"/>
+					<property name="isRequired" value="true"/>					
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="city"/>
+					<property name="isRequired" value="true"/>					
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="tel"/>
+					<property name="isRequired" value="true"/>
+					<property name="regex" value="\+[1-9]{1}[0-9]{3,14}"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="email"/>
+					<property name="isRequired" value="true"/>
+					<property name="unique" value="true" />
+					<property name="regex" value="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="arrival_time"/>
+					<property name="isRequired" value="false"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="depart_time"/>
+					<property name="isRequired" value="false"/>
+				</bean>
+				
+				<bean class="ru.innopolis.olympiads.domain.TextInput">
+					<property name="columnName" value="students"/>
+					<property name="isRequired" value="true"/>
+				</bean>
+				
+				
+				
+			</list>
+		</property>
+    </bean>
+</beans>

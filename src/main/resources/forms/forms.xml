@@ -7,4 +7,6 @@
        <import resource="contestantViewObject.xml"/>
 	   
 	   <import resource="final-registration-form.xml"/>
+	   
+	   <import resource="final-registration-form-guest.xml"/>
 </beans>
