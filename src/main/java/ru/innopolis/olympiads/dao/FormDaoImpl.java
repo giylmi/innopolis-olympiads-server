@@ -78,10 +78,10 @@ public class FormDaoImpl implements FormDao {
     }
 
     @Override
-    public List<Map<String, String>> allValues(final ViewObject vo) {
-        return ds.query(QueryManager.getQuery("sql/all.ftl", ImmutableMap.<String, Object>builder().put("vo", vo).build()), new RowMapper<Map<String, String>>() {
+    public List<Map<String, Object>> allValues(final ViewObject vo) {
+        return ds.query(QueryManager.getQuery("sql/all.ftl", ImmutableMap.<String, Object>builder().put("vo", vo).build()), new RowMapper<Map<String, Object>>() {
             @Override
-            public Map<String, String> mapRow(ResultSet resultSet, int i) throws SQLException {
+            public Map<String, Object> mapRow(ResultSet resultSet, int i) throws SQLException {
                 return vo.values(resultSet);
             }
         });

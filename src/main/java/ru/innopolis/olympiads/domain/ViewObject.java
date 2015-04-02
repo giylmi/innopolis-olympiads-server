@@ -14,14 +14,18 @@ public class ViewObject {
     private String tableName;
     private List<String> columnsList;
 
-    public Map<String, String> values(ResultSet resultSet) throws SQLException {
-        Map<String, String> map = new HashMap<>();
-        for (String column: columnsList)
-            if (resultSet.getObject(column) != null){
-                map.put(column, String.valueOf(resultSet.getObject(column)));
+    public Map<String, Object> values(ResultSet resultSet) throws SQLException {
+        Map<String, Object> map = new HashMap<>();
+        for (String column: columnsList) {
+            Object object = resultSet.getObject(column);
+            if (column.equals("status"))
+                map.put(column, (Boolean)object);
+            else if (object != null){
+                map.put(column, String.valueOf(object));
             } else {
                 map.put(column, null);
             }
+        }
 
         return map;
     }

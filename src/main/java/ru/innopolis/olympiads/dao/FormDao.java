@@ -16,7 +16,7 @@ public interface FormDao {
 
     Form getFormById(String formId);
 
-    List<Map<String,String>> allValues(ViewObject vo);
+    List<Map<String, Object>> allValues(ViewObject vo);
 
     ViewObject getVOById(String voId);
 

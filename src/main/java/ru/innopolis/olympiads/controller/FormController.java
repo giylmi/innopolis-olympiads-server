@@ -48,7 +48,7 @@ public class FormController {
 
     @RequestMapping(method = RequestMethod.POST, value = "values/{voId}")
     @ResponseBody
-    public List<Map<String, String>> contestants(@PathVariable("voId") String voId){
+    public List<Map<String, Object>> contestants(@PathVariable("voId") String voId){
         ViewObject vo = formDao.getVOById(voId);
         if (vo == null) return Lists.newArrayList();
         return formDao.allValues(vo);
