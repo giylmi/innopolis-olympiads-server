@@ -31,6 +31,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         configurer.setDefaultEncoding("UTF-8");
         configurer.setFreemarkerSettings(new Properties() {{
             this.put("default_encoding", "UTF-8");
+            this.put("url_escaping_charset", "UTF-8");
         }});
         return configurer;
     }
@@ -49,6 +50,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         viewResolver.setSuffix(".ftl");
         viewResolver.setPrefix("");
         viewResolver.setContentType("text/html;charset=UTF-8");
+        viewResolver.setRequestContextAttribute("rc");
         return viewResolver;
     }
 

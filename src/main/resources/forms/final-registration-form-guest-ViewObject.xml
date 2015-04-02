@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="final-registration-form-guests-ViewObject" class="ru.innopolis.olympiads.domain.ViewObject">
+        <property name="tableName" value="final_guests"/>
+        <property name="columnsList">
+            <list>
+                <value>last_name</value>
+				<value>first_name</value>
+                <value>middle_name</value>
+				<value>arrival_time</value>
+				<value>depart_time</value>
+                <value>status</value>
+            </list>
+        </property>
+    </bean>
+</beans>
